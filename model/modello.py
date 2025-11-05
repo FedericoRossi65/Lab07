@@ -17,13 +17,31 @@ class Model:
     def get_artefatti_filtrati(self, museo:str, epoca:str):
         """Restituisce la lista di tutti gli artefatti filtrati per museo e/o epoca (filtri opzionali)."""
         # TODO
-
+    # vado a prendere tutte le epoche elimando i duplicati utilizzando un set da artefatto.dao.estrazionedati
     def get_epoche(self):
         """Restituisce la lista di tutte le epoche."""
         # TODO
+        lista_epoca = []
+        for art in self._artefatto_dao.estrazione_dati():
+            lista_epoca.append(art.epoca)
+
+        lista_epoca_unica = (list(set(lista_epoca)))
+        print(lista_epoca_unica)
+        return lista_epoca_unica
+
+
 
     # --- MUSEI ---
     def get_musei(self):
         """ Restituisce la lista di tutti i musei."""
         # TODO
+        lista_musei = []
+        for mus in self._museo_dao.estrazione_dati():
+            lista_musei.append(mus.nome)
+        print(lista_musei)
+        return lista_musei
 
+#debug per getepoche
+l = Model()
+l.get_epoche()
+l.get_musei()#debug per getmusei

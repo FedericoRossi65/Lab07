@@ -43,6 +43,24 @@ class Controller:
 
     # CALLBACKS DROPDOWN
     # TODO
+    def richiama_dropdown_museo(self,e):
+        self.museo_selezionato = e.control.value
+    def richiama_dropdown_epoca(self,e):
+        self.epoca_selezionata = e.control.value
+
+
+
+
 
     # AZIONE: MOSTRA ARTEFATTI
     # TODO
+    def azione_mostra_artefatti(self,e):
+        self._view.artefatti_filtrati.controls.clear()
+        museo = self.museo_selezionato
+        epoca = self.epoca_selezionata
+        lista_artefatti = self._model.get_artefatti_filtrati(museo, epoca)
+        for i in lista_artefatti:
+            self._view.artefatti_filtrati.controls.append(i)
+        self._view.update()
+
+

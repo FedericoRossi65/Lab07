@@ -17,6 +17,28 @@ class Model:
     def get_artefatti_filtrati(self, museo:str, epoca:str):
         """Restituisce la lista di tutti gli artefatti filtrati per museo e/o epoca (filtri opzionali)."""
         # TODO
+
+        art_filtrati = []
+        for art in self._artefatto_dao.estrazione_dati():
+            if museo and epoca:
+                if art.epoca == epoca and art.museo == museo:
+                    art_filtrati.append(art)
+            elif museo:
+                if art.museo == museo:
+                    art_filtrati.append(art)
+            elif epoca:
+                if art.epoca == epoca:
+                    art_filtrati.append(art)
+            else:
+                art_filtrati.append(art)
+        return art_filtrati
+
+
+
+
+
+
+
     # vado a prendere tutte le epoche elimando i duplicati utilizzando un set da artefatto.dao.estrazionedati
     def get_epoche(self):
         """Restituisce la lista di tutte le epoche."""
@@ -26,7 +48,7 @@ class Model:
             lista_epoca.append(art.epoca)
 
         lista_epoca_unica = (list(set(lista_epoca)))
-        print(lista_epoca_unica)
+        #print(lista_epoca_unica)
         return lista_epoca_unica
 
 
@@ -38,10 +60,10 @@ class Model:
         lista_musei = []
         for mus in self._museo_dao.estrazione_dati():
             lista_musei.append(mus.nome)
-        print(lista_musei)
+        #print(lista_musei) # verifica funzionamento
         return lista_musei
 
 #debug per getepoche
-l = Model()
-l.get_epoche()
-l.get_musei()#debug per getmusei
+#l = Model()
+#l.get_epoche()
+#l.get_musei()#debug per getmusei

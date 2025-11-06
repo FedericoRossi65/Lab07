@@ -9,15 +9,15 @@ from database.DB_connect import ConnessioneDB
 
 class MuseoDAO:
     def __init__(self):
-        self._cnx = ConnessioneDB.get_connection() #connessione al database
+        pass
 
-    # TODO
+
     #estrapolazione dei musei dal database
     def estrazione_dati(self):
         from model.museoDTO import Museo
         try:
-
-            cursor = self._cnx.cursor()
+            cnx = ConnessioneDB.get_connection()
+            cursor = cnx.cursor()
             query = """ SELECT * FROM museo"""
             cursor.execute(query)
             lista_musei = []
@@ -26,7 +26,7 @@ class MuseoDAO:
                 musTemp = Museo(row[0], row[1], row[2])
                 lista_musei.append(musTemp)
             cursor.close()
-            self._cnx.close()
+            cnx.close()
 
 
             return lista_musei

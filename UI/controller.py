@@ -23,7 +23,7 @@ class Controller:
         self.epoca_selezionata = None
 
     # POPOLA DROPDOWN
-    # TODO
+
     def popola_dropdown(self):
         musei = self._model.get_musei()
         epoche = self._model.get_epoche()
@@ -42,7 +42,7 @@ class Controller:
 
 
     # CALLBACKS DROPDOWN
-    # TODO
+
     def richiama_dropdown_museo(self,e):
         self.museo_selezionato = e.control.value
     def richiama_dropdown_epoca(self,e):
@@ -53,14 +53,30 @@ class Controller:
 
 
     # AZIONE: MOSTRA ARTEFATTI
-    # TODO
-    def azione_mostra_artefatti(self,e):
-        self._view.artefatti_filtrati.controls.clear()
+
+    def azione_mostra_artefatti(self, e):
         museo = self.museo_selezionato
         epoca = self.epoca_selezionata
+
         lista_artefatti = self._model.get_artefatti_filtrati(museo, epoca)
-        for i in lista_artefatti:
-            self._view.artefatti_filtrati.controls.append(i)
+
+        # Pulisco la lista della view prima di mostrare nuovi risultati
+        self._view.artefatti_filtrati.controls.clear()
+
+        # Caso: nessun artefatto trovato
+        if not lista_artefatti:
+            self._view.show_alert("Nessun artefatto trovato con i filtri selezionati.")
+        else:
+            # Caso: artefatti trovati → li mostro nella ListView
+            for art in lista_artefatti:
+                self._view.artefatti_filtrati.controls.append(
+                    ft.Text(art)
+                )
+
+        # Aggiorno la pagina
         self._view.update()
+
+        # Ritorno la lista (facoltativo, utile per debug/test)
+
 
 

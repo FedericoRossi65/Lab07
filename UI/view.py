@@ -36,7 +36,7 @@ class View:
         self.txt_titolo = ft.Text(value="Musei di Torino", size=38, weight=ft.FontWeight.BOLD)
 
         # --- Sezione 2: Filtraggio ---
-        #TODO
+
         self.filt_musei = ft.Dropdown(label="Museo",width=400,on_change=self.controller.richiama_dropdown_museo) # dropdown per i musei
         self.filt_epoca = ft.Dropdown(label="Epoca",width = 200,on_change=self.controller.richiama_dropdown_epoca)# dropdpwn per le epoche
         self.artefatti_filtrati = ft.ListView(expand=True, spacing=5, padding=10, auto_scroll=True)# list view per il risultato del filtraggio
